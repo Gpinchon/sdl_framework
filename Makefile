@@ -1,6 +1,6 @@
 OBJ		= $(SRC:.c=.o)
 CC		= gcc
-CFLAGS	= -Ofast -Wall -Wextra -Werror -I ./include
+CFLAGS	= -Ofast -Wall -Wextra -Werror -I ./include -I ./
 NAME 	= libSDLframework.a
 
 ifeq ($(OS), Windows_NT)
@@ -64,7 +64,6 @@ endif
 $(NAME): $(OBJ) test.o
 	@echo $(OS)
 	ar rc $(NAME) $(OBJ)
-	mkdir lib && $(MV) libSDLframework.a lib/libSDLframework.a
 	@$(CC) $(CFLAGS) $(OBJ) test.o $(LIBS) -o $(TEST)
 
 printos:
