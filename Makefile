@@ -1,6 +1,6 @@
 OBJ		= $(SRC:.c=.o)
 CC		= gcc
-CFLAGS	= -Ofast -Wall -Wextra -Werror -I ./include -I ./
+CFLAGS	= -Ofast -Wall -Wextra -Werror -I ./include
 NAME 	= libSDLframework.a
 
 ifeq ($(OS), Windows_NT)
