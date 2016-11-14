@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 16:43:39 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/14 20:29:27 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/14 20:36:20 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ IMGDATA	get_image_data(void *image)
 	data.pixels = img->sdl_surface->pixels;
 	data.bpp = img->sdl_surface->format->BitsPerPixel;
 	data.opp = img->sdl_surface->format->BytesPerPixel;
-	data.sizeline = data.size.x * data.opp;
+	data.sizeline = img->sdl_surface->pitch;
 	data.endian = CURENDIAN;
 	return (data);
 }
