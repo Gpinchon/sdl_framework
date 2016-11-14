@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:15:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/10/23 19:39:25 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/14 13:52:48 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	*g_errors[MAX_ERROR];
 # else
 #  define FRAMEWORK_DEBUG(cond, c, fn)
 # endif
+
+# define CLEAR_COLOR	(t_rgb){RGBCOL, 0, 0, 0}
 
 typedef struct	s_point2
 {

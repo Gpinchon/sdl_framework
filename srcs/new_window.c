@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:17:20 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/10/22 23:04:15 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/14 13:52:17 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		*new_window(void *framework,
 	FRAMEWORK_DEBUG(!((t_window*)gstruct->data)->sdl_window, SDL_ERROR, "new_window");
 	((t_window*)gstruct->data)->sdl_surface = SDL_GetWindowSurface(((t_window*)gstruct->data)->sdl_window);
 	((t_window*)gstruct->data)->id = SDL_GetWindowID(((t_window*)gstruct->data)->sdl_window);
-	((t_window*)gstruct->data)->clear_color = rgb(255, 0, 0);
+	((t_window*)gstruct->data)->clear_color = CLEAR_COLOR;
 	((t_window*)gstruct->data)->gl_context = NULL;
 	((t_window*)gstruct->data)->clear_bits = GL_COLOR_BUFFER_BIT;
 	add_window(framework, gstruct);
