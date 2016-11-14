@@ -6,7 +6,7 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/23 19:39:12 by gpinchon          #+#    #+#              #
-#    Updated: 2016/11/14 13:53:26 by gpinchon         ###   ########.fr        #
+#    Updated: 2016/11/14 14:14:37 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME 	= libSDLframework.a
 
 ifeq ($(OS), Windows_NT)
 	LIBS	= -lmingw32 -lSDL2main -lSDL2 -lopengl32
-	TEST	= sdl_framework.exe
+	TEST	= sdl_test.exe
 	MAKE	= mingw32-make
 	RM		= del
 	RMDIR	= rmdir
@@ -45,7 +45,7 @@ ifeq ($(OS), Windows_NT)
 				srcs\errors.c
 else
 	LIBS	= -lSDL2main -lSDL2 -lGL
-	TEST 	= sdl_framework
+	TEST 	= sdl_test
 	MAKE	= make
 	RM		= rm -rf
 	RMDIR	= rm -rf
@@ -73,17 +73,21 @@ else
 				srcs/errors.c
 endif
 
-$(NAME): $(OBJ) test.o
+$(NAME): $(OBJ)
 	@echo $(OS)
 	ar rc $(NAME) $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) test.o $(LIBS) -o $(TEST)
+
+test: test.o
+	@$(CC) $(CFLAGS) test.o -L ./ -lSDLframework $(LIBS) -o $(TEST)
 
 printos:
 	@echo $(OS)
 
+clean:
+	$(RM) $(OBJ) test.o
+
 fclean:
 	$(RM) $(OBJ) $(NAME) $(TEST)
-	$(RMDIR) lib
 
 re:fclean
 	$(MAKE)
