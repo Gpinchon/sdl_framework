@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:15:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/14 13:57:50 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/14 20:20:06 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct	s_img_data
 {
 	t_point2	size;
 	Uint8		bpp;
+	Uint8		opp;
 	Uint8		sizeline;
 	Uint16		endian;
 	void		*pixels;
