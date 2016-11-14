@@ -6,11 +6,12 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 16:43:39 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/14 20:36:20 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/14 20:57:33 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <internal_framework.h>
+#include <stdio.h>
 
 void	*add_image(t_framework *framework, GSTRUCT *img)
 {
@@ -44,6 +45,7 @@ IMGDATA	get_image_data(void *image)
 	data.opp = img->sdl_surface->format->BytesPerPixel;
 	data.sizeline = img->sdl_surface->pitch;
 	data.endian = CURENDIAN;
+	printf("%i\n", data.sizeline);
 	return (data);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:15:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/14 20:20:06 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/14 21:20:13 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ char	*g_errors[MAX_ERROR];
 /*
 ** Comment/uncomment to debug framework
 */
-# define DEBUG
+/*
+** # define DEBUG
+*/
 
 /*
 ** Comment/uncomment to exit on error
@@ -97,8 +99,8 @@ typedef struct	s_img_data
 	t_point2	size;
 	Uint8		bpp;
 	Uint8		opp;
-	Uint8		sizeline;
 	Uint16		endian;
+	Uint32		sizeline;
 	void		*pixels;
 }				t_img_data;
 
@@ -166,7 +168,10 @@ void		print_error(int error_code, const char *function_name);
 ** framework_loop returns when exit_framework is called
 */
 Uint8		get_key_status(void *framework, Uint32 keycode);
+Uint8		get_button_status(void *framework, Uint8 button);
+Uint8		mousemoved(void	*framework);
 t_point2	get_mouse_pos(void *framework);
+t_point2	get_last_mouse_pos(void *framework);
 void		framework_loop(void *framework);
 /*
 ** loop_hook prototype == void callback(void *arg);
