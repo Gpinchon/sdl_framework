@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 15:36:09 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/07/06 21:33:16 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:29:34 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	destroy_framework(void *framework)
 
 void	exit_framework(void *framework)
 {
-	FRAMEWORK_DEBUG(!framework, NULL_FRAMEWORK_POINTER, "destroy_framework");
+	FRAMEWORK_DEBUG(!framework, NULL_FRAMEWORK_POINTER, "exit_framework");
 	((t_framework *)framework)->done = SDL_TRUE;
 }

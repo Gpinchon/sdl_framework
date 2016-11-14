@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/14 14:20:03 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:29:51 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ void	framework_loop(void *framework)
 		i[1] = e.key.keysym.scancode;
 		i[2] = e.key.repeat;
 		if (e.type == SDL_QUIT)
-		{
-			destroy_framework(f);
 			break ;
-		}
 		if (f->loop.function)
 			f->loop.function(f->loop.arg);
 		check_mouse(framework, e);
@@ -72,4 +69,5 @@ void	framework_loop(void *framework)
 		}
 		SDL_Delay(0);
 	}
+	destroy_framework(f);
 }
