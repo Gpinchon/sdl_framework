@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/14 21:19:31 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/15 11:47:56 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	framework_loop(void *framework)
 				f->keyup[i[0]][i[1]].
 					function(f->keyup[i[0]][i[1]].arg, i[1]);
 		}
-		SDL_Delay(1);
 	}
 	destroy_framework(f);
 }
