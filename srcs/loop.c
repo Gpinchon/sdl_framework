@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/15 11:57:07 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/15 12:05:26 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	framework_loop(void *framework)
 			i[1] = e.key.keysym.scancode;
 			i[2] = e.key.repeat;
 			if (e.type == SDL_QUIT)
-				break ;
+				f->done = SDL_TRUE;
 			check_mouse(framework, e);
 			if (e.type == SDL_KEYDOWN)
 			{
