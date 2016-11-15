@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/15 11:47:56 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/15 11:57:07 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,30 @@ void	framework_loop(void *framework)
 	f = framework;
 	while (!f->done)
 	{
-		SDL_PollEvent(&e);
-		i[0] = e.key.windowID;
-		i[1] = e.key.keysym.scancode;
-		i[2] = e.key.repeat;
-		if (e.type == SDL_QUIT)
-			break ;
 		if (f->loop.function)
-			f->loop.function(f->loop.arg);
-		check_mouse(framework, e);
-		if (e.type == SDL_KEYDOWN)
+				f->loop.function(f->loop.arg);
+		while (SDL_PollEvent(&e) && !f->done)
 		{
-			f->keys[i[1]] = 1;
-			if (f->keydown[i[0]][i[1]][i[2]].function)
-				f->keydown[i[0]][i[1]][i[2]].
-					function(f->keydown[i[0]][i[1]][i[2]].arg, i[1]);
-		}
-		else if (e.type == SDL_KEYUP)
-		{
-			f->keys[i[1]] = 0;
-			if (f->keyup[i[0]][i[1]].function)
-				f->keyup[i[0]][i[1]].
-					function(f->keyup[i[0]][i[1]].arg, i[1]);
+			i[0] = e.key.windowID;
+			i[1] = e.key.keysym.scancode;
+			i[2] = e.key.repeat;
+			if (e.type == SDL_QUIT)
+				break ;
+			check_mouse(framework, e);
+			if (e.type == SDL_KEYDOWN)
+			{
+				f->keys[i[1]] = 1;
+				if (f->keydown[i[0]][i[1]][i[2]].function)
+					f->keydown[i[0]][i[1]][i[2]].
+						function(f->keydown[i[0]][i[1]][i[2]].arg, i[1]);
+			}
+			else if (e.type == SDL_KEYUP)
+			{
+				f->keys[i[1]] = 0;
+				if (f->keyup[i[0]][i[1]].function)
+					f->keyup[i[0]][i[1]].
+						function(f->keyup[i[0]][i[1]].arg, i[1]);
+			}
 		}
 	}
 	destroy_framework(f);
