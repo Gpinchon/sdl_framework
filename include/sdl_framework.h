@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:15:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/14 21:20:13 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/15 11:34:16 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,10 @@ t_callback	new_callback(void (*fun)(), void *arg);
 ** Custom variables destruction
 */
 void		exit_framework(void *framework);
-void		*destroy_window(void *framework, void *window);
-void		destroy_windows(void *f);
-void		*destroy_image(void *framework, void *image);
-void		destroy_images(void *f);
+void		destroy_window(void *framework, void *window);
+void		destroy_windows(void *framework);
+void		destroy_image(void *framework, void *image);
+void		destroy_images(void *framework);
 /*
 ** Color management functions
 ** Call map_color with a pointer 

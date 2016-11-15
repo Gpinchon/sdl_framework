@@ -6,13 +6,13 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 15:45:50 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/07/06 16:47:20 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/15 11:35:46 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <internal_framework.h>
 
-void	*destroy_window(void *framework, void *window)
+void	destroy_window(void *framework, void *window)
 {
 	GSTRUCT		*win;
 	t_window	*winwin;
@@ -33,7 +33,7 @@ void	*destroy_window(void *framework, void *window)
 	winwin = get_data_pointer(window, sizeof(t_window));
 	SDL_DestroyWindow(winwin->sdl_window);
 	free(window);
-	return (win);
+	free(winwin);
 }
 
 void	destroy_windows(void *f)

@@ -6,13 +6,13 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 16:45:27 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/07/07 01:11:55 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/15 11:33:35 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <internal_framework.h>
 
-void	*destroy_image(void *framework, void *image)
+void	destroy_image(void *framework, void *image)
 {
 	GSTRUCT		*gstruct;
 	t_img		*img;
@@ -34,7 +34,6 @@ void	*destroy_image(void *framework, void *image)
 	SDL_FreeSurface(img->sdl_surface);
 	free(img);
 	free(image);
-	return (gstruct);
 }
 
 void	destroy_images(void *f)
