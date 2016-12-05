@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/15 12:05:26 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/05 21:57:54 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	framework_loop(void *framework)
 	{
 		if (f->loop.function)
 				f->loop.function(f->loop.arg);
-		while (SDL_PollEvent(&e) && !f->done)
+		if (SDL_PollEvent(&e) && !f->done)
 		{
 			i[0] = e.key.windowID;
 			i[1] = e.key.keysym.scancode;
