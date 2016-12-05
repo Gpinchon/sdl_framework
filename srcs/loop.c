@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/05 21:59:37 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/05 22:02:05 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	check_mouse(void *framework, SDL_Event	e)
 				function(f->mousemove[e.key.windowID].arg, get_mouse_pos(framework));
 		f->lastmousepos = get_mouse_pos(framework);
 	}
-	if (e.type == SDL_MOUSEBUTTONDOWN)
+	else if (e.type == SDL_MOUSEBUTTONDOWN)
 	{
 		f->buttons[e.button.button] = 1;
 		if (f->mousedown[e.key.windowID][e.button.button].function)
@@ -62,7 +62,7 @@ void	framework_loop(void *framework)
 	{
 		if (f->loop.function)
 				f->loop.function(f->loop.arg);
-		if (SDL_PollEvent(&e) && !f->done)
+		while (SDL_PollEvent(&e) && !f->done)
 		{
 			i[0] = e.key.windowID;
 			i[1] = e.key.keysym.scancode;

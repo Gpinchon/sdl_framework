@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 15:31:54 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/14 21:00:32 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/05 22:06:29 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,6 @@ void	repeat(void *image)
 
 void	refresh(void *window)
 {
-	//t_rgba	color;
-	//int w, h, i = 0;
-
-	//clear_window(window);
-	//get_image_size(get_attached_image(window), &w, &h);
-	//refresh_window(window);
-	//while (i < w)
-	//{
-	//	color = rgba(rand() / (float)RAND_MAX * 255, rand() / (float)RAND_MAX * 255, rand() / (float)RAND_MAX * 255, rand() / (float)RAND_MAX * 255);
-	//	put_image(window, get_attached_image(window), (t_point2){rand() / (float)RAND_MAX * 512, rand() / (float)RAND_MAX * 512});
-	//	put_image_pixel(get_attached_image(window), &color, (t_point2){rand() / (float)RAND_MAX * i, rand() / (float)RAND_MAX * h});
-	//	put_window_pixel(window, &color, (t_point2){rand() / (float)RAND_MAX * 768, rand() / (float)RAND_MAX * 768});
-	//	i++;
-	//}
-	//clear_window_image(window);
-	//put_image(window, get_attached_image(window), (t_point2){rand() / (float)RAND_MAX * 1024, rand() / (float)RAND_MAX * 1024});
-	//repeat(get_attached_image(window));
 	refresh_window(window);
 }
 
@@ -67,8 +50,6 @@ void	mousemove(void *win, t_point2 mousepos)
 	t_rgba	color;
 
 	color = rgba(rand() / (float)RAND_MAX * 255, rand() / (float)RAND_MAX * 255, rand() / (float)RAND_MAX * 255, rand() / (float)RAND_MAX * 255);
-	//put_image_pixel(get_attached_image(win), &color, mousepos);
-	//put_window_pixel(win, &color, mousepos);
 	put_window_image_pixel(win, &color, mousepos);
 }
 
@@ -92,8 +73,8 @@ int main(int argc, char **argv)
 	assign_loop_hook(framework, new_callback(refresh, winwin));
 	assign_keypress_hook(framework, winwin, SDL_SCANCODE_ESCAPE, new_callback(exit_framework, framework));
 	assign_mousemove_hook(framework, winwin, new_callback(mousemove, winwin));
-	//assign_keypress_hook(framework, winwin, SDL_SCANCODE_SPACE, new_callback(press, image));
-	//assign_keyrepeat_hook(framework, winwin, SDL_SCANCODE_SPACE, new_callback(repeat, image));
+	assign_keypress_hook(framework, winwin, SDL_SCANCODE_SPACE, new_callback(press, image));
+	assign_keyrepeat_hook(framework, winwin, SDL_SCANCODE_SPACE, new_callback(repeat, image));
 	framework_loop(framework);
 	return (argc + argv[0][0]);
 }
