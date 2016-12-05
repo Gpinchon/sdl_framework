@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 16:43:39 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/14 21:22:42 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/11/24 21:57:57 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ IMGDATA	get_image_data(void *image)
 	IMGDATA	data;
 
 	img = get_data_pointer(image, sizeof(t_img));
-	data.size = (t_point2){img->sdl_surface->h, img->sdl_surface->w};
+	data.size = (t_point2){img->sdl_surface->w, img->sdl_surface->h};
 	data.pixels = img->sdl_surface->pixels;
 	data.bpp = img->sdl_surface->format->BitsPerPixel;
 	data.opp = img->sdl_surface->format->BytesPerPixel;

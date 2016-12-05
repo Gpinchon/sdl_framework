@@ -6,7 +6,7 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/23 19:39:12 by gpinchon          #+#    #+#              #
-#    Updated: 2016/11/14 14:14:37 by gpinchon         ###   ########.fr        #
+#    Updated: 2016/11/24 01:14:48 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ ifeq ($(OS), Windows_NT)
 	LIBS	= -lmingw32 -lSDL2main -lSDL2 -lopengl32
 	TEST	= sdl_test.exe
 	MAKE	= mingw32-make
-	RM		= del
-	RMDIR	= rmdir
+	RM		= rm -rf
 	MV		= move
 	SRC		=	srcs\new_framework.c		\
 				srcs\new_window.c			\
@@ -48,7 +47,6 @@ else
 	TEST 	= sdl_test
 	MAKE	= make
 	RM		= rm -rf
-	RMDIR	= rm -rf
 	MV		= mv
 	SRC		=	srcs/new_framework.c		\
 				srcs/new_window.c			\
