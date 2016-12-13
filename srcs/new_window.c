@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:17:20 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/14 13:52:17 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/13 11:35:51 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void	*add_window(t_framework *framework, GSTRUCT *window)
 	else
 		return (append_object((void*)window, (void*)framework->windows));
 }
-
-#include <stdio.h>
 
 void		*new_window(void *framework,
 	int width, int height, char *name)

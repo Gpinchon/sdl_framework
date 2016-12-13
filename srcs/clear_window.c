@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/03 20:57:30 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/10/22 23:03:35 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/13 11:36:13 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	*refresh_window(void *window)
 	if (wstruct->attached_image)
 		put_image_stretched(window, wstruct->attached_image);
 	SDL_UpdateWindowSurface(wstruct->sdl_window);
-	SDL_GL_SwapWindow(wstruct->sdl_window);
+	if (wstruct->gl_context)
+		SDL_GL_SwapWindow(wstruct->sdl_window);
 	return (window);
 }

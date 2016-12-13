@@ -6,7 +6,7 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/23 19:39:12 by gpinchon          #+#    #+#              #
-#    Updated: 2016/11/24 01:14:48 by gpinchon         ###   ########.fr        #
+#    Updated: 2016/12/13 11:37:00 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,11 @@ else
 				srcs/internal_memory.c		\
 				srcs/internal_string.c		\
 				srcs/errors.c
+endif
+
+ifeq ($(shell uname -s), Darwin)
+CFLAGS	= -Ofast -Wall -Wextra -Werror -I ~/.brew/include -I ./include
+LIBS	= -L ~/.brew/lib -lSDL2
 endif
 
 $(NAME): $(OBJ)
