@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 22:18:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/07/07 17:03:55 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:45:32 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ void	*load_image_file(void *framework, const char *path)
 	SDL_LockSurface(bmp);
 	if (bmp->format->BitsPerPixel == 32)
 	{
-		SDL_FreeFormat(bmp->format);
-		bmp->format = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888);
+		convert_bmp(bmp);
 	}
 	((t_img*)istruct->data)->sdl_surface = bmp;
 	SDL_UnlockSurface(bmp);
