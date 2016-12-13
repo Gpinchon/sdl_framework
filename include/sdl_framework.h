@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:15:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/13 14:59:32 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:33:18 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ IMGDATA		get_image_data(void *image);
 /*
 ** Pixel put functions, use to put a color (pointer to an rgb(a) struct) to image/window
 */
+t_rgba		get_image_pixel_rgba(void *image, t_point2 coord);
 void		*get_image_pixel(void *image, t_point2 position);
 void		*get_window_pixel(void *window, t_point2 position);
 void		*put_image_pixel(void *image, void *color, t_point2 position);
