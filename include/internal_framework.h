@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 14:18:46 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/10/22 23:58:34 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/13 14:59:12 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ typedef struct	s_framework
 }				t_framework;
 
 void	*add_image(t_framework *framework, GSTRUCT *img);
-void	*get_image_pixel(void *image, t_point2 position);
-void	*get_window_pixel(void *window, t_point2 position);
 void	destroy_framework(void *framework);
 void	*int_memset(void *str, int c, size_t n);
 void	*int_memalloc(size_t size);

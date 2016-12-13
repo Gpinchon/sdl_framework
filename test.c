@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 15:31:54 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/13 11:36:48 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/13 11:40:44 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int main(int argc, char **argv)
 	winwin = new_window(framework, 768, 768, "test");
 	//set_window_clear_bits(winwin, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//printf("Current OpenGL version\n%s\n", glGetString(GL_VERSION));
-	image = new_image(framework, 4096, 4096);
-	//image = load_image_file(framework, "./Graphics_duck.bmp");
+	//image = new_image(framework, 4096, 4096);
+	image = load_image_file(framework, "./Graphics_duck.bmp");
 	attach_image_to_window(winwin, image);
 	assign_loop_hook(framework, new_callback(refresh, winwin));
 	assign_keypress_hook(framework, winwin, SDL_SCANCODE_ESCAPE, new_callback(exit_framework, framework));
