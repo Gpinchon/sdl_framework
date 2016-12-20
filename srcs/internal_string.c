@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 10:52:53 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 13:29:48 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 14:38:11 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ static void		int_putnbr_recursif(int n, int fd)
 	if (n > 9)
 		int_putnbr_recursif(n / 10, fd);
 	c = '0' + (n % 10);
-	write(fd, &c, 1);
+	if (!write(fd, &c, 1))
+		return ;
 }
 
 void			int_putstr_fd(char const *str, int fd)
 {
-	write(fd, str, int_strlen(str));
+	if (!write(fd, str, int_strlen(str)))
+		return ;
 }
 
 void			int_putnbr_fd(int n, int fd)
@@ -48,7 +50,8 @@ void			int_putnbr_fd(int n, int fd)
 	if (n < 0)
 	{
 		c = '-';
-		write(fd, &c, 1);
+		if (!write(fd, &c, 1))
+			return ;
 		n = -n;
 	}
 	int_putnbr_recursif(n, fd);
@@ -60,5 +63,6 @@ void			int_putendl_fd(char const *s, int fd)
 
 	int_putstr_fd((char *)s, fd);
 	c = '\n';
-	write(fd, &c, 1);
+	if (!write(fd, &c, 1))
+		return ;
 }
