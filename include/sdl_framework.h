@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:15:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 15:45:53 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 20:18:15 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ void		framework_loop_once(void *framework);
 ** loop_hook prototype == void callback(void *arg);
 */
 void		set_loop_hook(void *framework, t_callback callback);
+void		set_onexit_hook(void *framework, t_callback callback);
 /*
 ** keyup/down/press_hook prototype == void callback(void *arg, Uint32 keycode);
 */
