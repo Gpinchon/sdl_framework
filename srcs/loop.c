@@ -6,12 +6,11 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 15:30:12 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 15:44:17 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <internal_framework.h>
-#include <stdio.h>
 
 Uint8	mousemoved(void *framework)
 {

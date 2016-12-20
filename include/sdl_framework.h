@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:15:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 15:18:55 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 15:45:53 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void		*new_window(void *framework, int width, int height, char *name);
 void		*new_image(void *framework, int width, int heigth);
 void		*new_gl_context(void *window);
 t_callback	new_callback(void (*fun)(), void *arg);
+Uint32		get_ticks();
 /*
 ** Custom variables destruction
 */

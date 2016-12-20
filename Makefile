@@ -6,7 +6,7 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/23 19:39:12 by gpinchon          #+#    #+#              #
-#    Updated: 2016/12/20 15:14:43 by gpinchon         ###   ########.fr        #
+#    Updated: 2016/12/20 15:45:27 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,8 @@ else
 				srcs/new_callback.c			\
 				srcs/internal_memory.c		\
 				srcs/internal_string.c		\
-				srcs/errors.c
+				srcs/errors.c				\
+				srcs/time.c
 endif
 
 ifeq ($(shell uname -s), Darwin)
