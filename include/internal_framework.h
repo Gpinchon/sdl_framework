@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 14:18:46 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 15:14:00 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 15:24:06 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct	s_framework
 	GSTRUCT		*windows;
 	GSTRUCT		*images;
 	SDL_bool	done;
+	t_callback	onexit;
 	t_callback	loop;
 	t_callback	low_mem;
 	t_callback	keyup[MAX_WIN][MAX_SCAN];

@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 15:19:37 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 15:27:24 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	framework_loop_once(void *framework)
 	SDL_Event	e;
 
 	f = framework;
-	if (f->done)
-		return ;
 	FRAMEWORK_DEBUG(!framework,
 		NULL_FRAMEWORK_POINTER, "framework_loop_once");
 	SDL_PollEvent(&e);
@@ -79,6 +77,13 @@ void	framework_loop_once(void *framework)
 	while (SDL_PollEvent(&e) && !f->done)
 	{
 		f->done = e.type == SDL_QUIT;
+		if (f->done)
+		{
+			if (f->onexit.function)
+				f->onexit.function(f->onexit.arg);
+			destroy_framework(framework);
+			break ;
+		}
 		check_mouse(framework, &e);
 		check_keyboard(framework, &e);
 	}
@@ -100,6 +105,13 @@ void	framework_loop(void *framework)
 		while (SDL_PollEvent(&e) && !f->done)
 		{
 			f->done = e.type == SDL_QUIT;
+			if (f->done)
+			{
+				if (f->onexit.function)
+					f->onexit.function(f->onexit.arg);
+				destroy_framework(framework);
+				break ;
+			}
 			check_mouse(framework, &e);
 			check_keyboard(framework, &e);
 		}
