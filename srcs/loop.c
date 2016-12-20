@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 15:27:24 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 15:30:12 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void	framework_loop(void *framework)
 			{
 				if (f->onexit.function)
 					f->onexit.function(f->onexit.arg);
-				destroy_framework(framework);
 				break ;
 			}
 			check_mouse(framework, &e);
