@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/23 17:56:10 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/07/07 14:42:32 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 13:18:46 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	*new_object(size_t size)
 void	*get_data_pointer(t_generic *object, size_t size)
 {
 	FRAMEWORK_DEBUG(!object, NULL_OBJECT_POINTER, "get_data_pointer");
-	FRAMEWORK_DEBUG(object->size != size, INVALID_DATA_SIZE, "get_data_pointer");
+	FRAMEWORK_DEBUG(object->size != size,
+		INVALID_DATA_SIZE, "get_data_pointer");
 	FRAMEWORK_DEBUG(!object->data, NULL_DATA_POINTER, "get_data_pointer");
 	return (object->size == size ? object->data : NULL);
 }

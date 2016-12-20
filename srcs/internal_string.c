@@ -1,10 +1,16 @@
-# include <internal_framework.h>
-#define __HALF_MAX_SIGNED(type) ((type)1 << (sizeof(type)*8-2))
-#define __MAX_SIGNED(type) (__HALF_MAX_SIGNED(type) - 1 + __HALF_MAX_SIGNED(type))
-#define __MIN_SIGNED(type) (-1 - __MAX_SIGNED(type))
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   internal_string.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/13 10:52:53 by gpinchon          #+#    #+#             */
+/*   Updated: 2016/12/20 13:29:48 by gpinchon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define __MIN(type) ((type)-1 < 1?__MIN_SIGNED(type):(type)0)
-#define __MAX(type) ((type)~__MIN(type))
+#include <internal_framework.h>
 
 static size_t	int_strlen(const char *str)
 {
@@ -16,25 +22,24 @@ static size_t	int_strlen(const char *str)
 	return (count);
 }
 
-static void		int_putchar_fd(char c, int fd)
+static void		int_putnbr_recursif(int n, int fd)
 {
+	char	c;
+
+	if (n > 9)
+		int_putnbr_recursif(n / 10, fd);
+	c = '0' + (n % 10);
 	write(fd, &c, 1);
 }
 
-static void		int_putnbr_recursif(int n, int fd)
-{
-	if (n > 9)
-		int_putnbr_recursif(n / 10, fd);
-	int_putchar_fd('0' + (n % 10), fd);
-}
-
-void		int_putstr_fd(char const *str, int fd)
+void			int_putstr_fd(char const *str, int fd)
 {
 	write(fd, str, int_strlen(str));
 }
 
 void			int_putnbr_fd(int n, int fd)
 {
+	char	c;
 	if (n == __MAX(int))
 	{
 		int_putstr_fd("-2147483648", fd);
@@ -42,14 +47,18 @@ void			int_putnbr_fd(int n, int fd)
 	}
 	if (n < 0)
 	{
-		int_putchar_fd('-', fd);
+		c = '-';
+		write(fd, &c, 1);
 		n = -n;
 	}
 	int_putnbr_recursif(n, fd);
 }
 
-void		int_putendl_fd(char const *s, int fd)
+void			int_putendl_fd(char const *s, int fd)
 {
+	char	c;
+
 	int_putstr_fd((char *)s, fd);
-	int_putchar_fd('\n', fd);
+	c = '\n';
+	write(fd, &c, 1);
 }

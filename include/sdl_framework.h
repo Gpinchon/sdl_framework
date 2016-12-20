@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:15:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/13 15:33:18 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 14:18:22 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,27 +179,27 @@ void		framework_loop(void *framework);
 /*
 ** loop_hook prototype == void callback(void *arg);
 */
-void		assign_loop_hook(void *framework, t_callback callback);
+void		set_loop_hook(void *framework, t_callback callback);
 /*
 ** keyup/down/press_hook prototype == void callback(void *arg, Uint32 keycode);
 */
-void		assign_keyup_hook(void *framework, void *window,
-	Uint32 keycode, t_callback callback);
-void		assign_keyrepeat_hook(void *framework, void *window,
-	Uint32 keycode, t_callback callback);
-void		assign_keypress_hook(void *framework, void *window,
-	Uint32 keycode, t_callback callback);
+void		set_keyup_hook(void *framework, void *window,
+	char *keyname, t_callback callback);
+void		set_keypress_hook(void *framework, void *window,
+	char *keyname, t_callback callback);
+void		set_keyrepeat_hook(void *framework, void *window,
+	char *keyname, t_callback callback);
 /*
 ** mousemove_hook prototype == void callback(void *arg, t_point2 mouse_position);
 */
-void	assign_mousemove_hook(void *framework, void *window,
+void	set_mousemove_hook(void *framework, void *window,
 	t_callback callback);
 /*
 ** mousedown/up_hook prototype == void callback(void *arg, Uint8 button);
 */
-void	assign_mousedown_hook(void *framework, void *window,
+void	set_mousedown_hook(void *framework, void *window,
 	Uint8 button, t_callback callback);
-void	assign_mouseup_hook(void *framework, void *window,
+void	set_mouseup_hook(void *framework, void *window,
 	Uint8 button, t_callback callback);
 
 #endif

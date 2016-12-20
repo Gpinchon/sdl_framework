@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 15:31:54 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/13 11:40:44 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 14:31:41 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ int main(int argc, char **argv)
 	//image = new_image(framework, 4096, 4096);
 	image = load_image_file(framework, "./Graphics_duck.bmp");
 	attach_image_to_window(winwin, image);
-	assign_loop_hook(framework, new_callback(refresh, winwin));
-	assign_keypress_hook(framework, winwin, SDL_SCANCODE_ESCAPE, new_callback(exit_framework, framework));
-	assign_mousemove_hook(framework, winwin, new_callback(mousemove, winwin));
-	assign_keypress_hook(framework, winwin, SDL_SCANCODE_SPACE, new_callback(press, image));
-	assign_keyrepeat_hook(framework, winwin, SDL_SCANCODE_SPACE, new_callback(repeat, image));
+	set_loop_hook(framework, new_callback(refresh, winwin));
+	set_keypress_hook(framework, winwin, "Escape", new_callback(exit_framework, framework));
+	set_mousemove_hook(framework, winwin, new_callback(mousemove, winwin));
+	set_keypress_hook(framework, winwin, "Space", new_callback(press, image));
+	set_keyrepeat_hook(framework, winwin, "Space", new_callback(repeat, image));
 	framework_loop(framework);
 	return (argc + argv[0][0]);
 }

@@ -6,7 +6,7 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/23 19:39:12 by gpinchon          #+#    #+#              #
-#    Updated: 2016/12/13 11:37:00 by gpinchon         ###   ########.fr        #
+#    Updated: 2016/12/20 14:32:54 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,10 @@ ifeq ($(OS), Windows_NT)
 				srcs\new_color.c			\
 				srcs\objects.c				\
 				srcs\loop.c					\
-				srcs\hook.c					\
+				srcs\hook_get.c				\
+				srcs\hook_set_keys.c		\
+				srcs\hook_set_mouse.c		\
+				srcs\hook_set_system.c		\
 				srcs\new_callback.c			\
 				srcs\internal_memory.c		\
 				srcs\internal_string.c		\
@@ -64,7 +67,10 @@ else
 				srcs/new_color.c			\
 				srcs/objects.c				\
 				srcs/loop.c					\
-				srcs/hook.c					\
+				srcs/hook_get.c				\
+				srcs/hook_set_keys.c		\
+				srcs/hook_set_mouse.c		\
+				srcs/hook_set_system.c		\
 				srcs/new_callback.c			\
 				srcs/internal_memory.c		\
 				srcs/internal_string.c		\
@@ -77,7 +83,6 @@ LIBS	= -L ~/.brew/lib -lSDL2
 endif
 
 $(NAME): $(OBJ)
-	@echo $(OS)
 	ar rc $(NAME) $(OBJ)
 
 test: test.o

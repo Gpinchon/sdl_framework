@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 14:18:46 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/13 14:59:12 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 13:01:20 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,17 @@
 #  define CURENDIAN SDL_LIL_ENDIAN
 # endif
 
+# define __HALF_MAX_SIGNED(type) ((type)1 << (sizeof(type)*8-2))
+# define __MAX_SIGNED(type) (__HALF_MAX_SIGNED(type) - 1 + __HALF_MAX_SIGNED(type))
+# define __MIN_SIGNED(type) (-1 - __MAX_SIGNED(type))
+# define __MIN(type) ((type)-1 < 1?__MIN_SIGNED(type):(type)0)
+# define __MAX(type) ((type)~__MIN(type))
+
 # define GSTRUCT	struct s_generic
 # define MAX_REPEAT	2
 # define MAX_WIN	50
 # define MAX_SCAN	300
+# define MAX_TYPE	50
 # define MAX_BUTTON	5
 
 typedef struct	s_generic
@@ -65,10 +72,10 @@ typedef struct	s_framework
 	GSTRUCT		*images;
 	SDL_bool	done;
 	t_callback	loop;
-	t_callback	keydown[MAX_WIN][MAX_SCAN][MAX_REPEAT];
+	t_callback	low_mem;
 	t_callback	keyup[MAX_WIN][MAX_SCAN];
-	t_callback	mousedown[MAX_WIN][MAX_BUTTON];
-	t_callback	mouseup[MAX_WIN][MAX_BUTTON];
+	t_callback	keydown[MAX_WIN][MAX_SCAN][MAX_REPEAT];
+	t_callback	mouse[MAX_WIN][MAX_BUTTON][2];
 	t_callback	mousemove[MAX_WIN];
 	Uint8		keys[MAX_SCAN];
 	Uint8		buttons[MAX_BUTTON];

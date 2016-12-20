@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 16:43:39 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/13 15:33:00 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 13:13:32 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	*add_image(t_framework *framework, GSTRUCT *img)
 		return (append_object((void*)img, (void*)framework->images));
 }
 
-void	*new_image(void *framework, int width, int heigth)
+void	*new_image(void *framework, int w, int h)
 {
 	GSTRUCT	*gstruct;
 
 	gstruct = new_object(sizeof(t_img));
-	((t_img*)gstruct->data)->sdl_surface = SDL_CreateRGBSurface(0, width, heigth,
+	((t_img*)gstruct->data)->sdl_surface = SDL_CreateRGBSurface(0, w, h,
 		32, RMASK, GMASK, BMASK, AMASK);
 	return (add_image(framework, gstruct));
 }
