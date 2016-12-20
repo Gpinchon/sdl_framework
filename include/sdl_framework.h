@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:15:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 14:18:22 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 15:18:55 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ Uint8		mousemoved(void	*framework);
 t_point2	get_mouse_pos(void *framework);
 t_point2	get_last_mouse_pos(void *framework);
 void		framework_loop(void *framework);
+void		framework_loop_once(void *framework);
 /*
 ** loop_hook prototype == void callback(void *arg);
 */

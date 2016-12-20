@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 15:13:55 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 15:19:37 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,29 @@ void	check_keyboard(t_framework *f, SDL_Event *e)
 			f->keyup[e->key.windowID][e->key.keysym.scancode].
 				function(f->keyup[e->key.windowID][e->key.keysym.scancode].arg,
 					e->key.keysym.scancode);
+	}
+}
+
+void	framework_loop_once(void *framework)
+{
+	t_framework	*f;
+	SDL_Event	e;
+
+	f = framework;
+	if (f->done)
+		return ;
+	FRAMEWORK_DEBUG(!framework,
+		NULL_FRAMEWORK_POINTER, "framework_loop_once");
+	SDL_PollEvent(&e);
+	if (e.type == SDL_APP_LOWMEMORY && f->low_mem.function)
+		f->low_mem.function(f->low_mem.arg);
+	if (f->loop.function)
+		f->loop.function(f->loop.arg);
+	while (SDL_PollEvent(&e) && !f->done)
+	{
+		f->done = e.type == SDL_QUIT;
+		check_mouse(framework, &e);
+		check_keyboard(framework, &e);
 	}
 }
 
