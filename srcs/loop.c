@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/22 22:41:34 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/22 22:47:22 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,10 @@ void	framework_loop_once(void *framework)
 	f = framework;
 	FRAMEWORK_DEBUG(!framework,
 		NULL_FRAMEWORK_POINTER, "framework_loop_once");
-	if (!SDL_PollEvent(&e) || (f->done))
+	SDL_PollEvent(&e)
+	if ((f->done = e.type == SDL_QUIT))
 		return ;
-	else if ((f->done = e.type == SDL_QUIT))
-		return ;
-	if (e.type == SDL_APP_LOWMEMORY && f->low_mem.function)
+	else if (e.type == SDL_APP_LOWMEMORY && f->low_mem.function)
 		f->low_mem.function(f->low_mem.arg);
 	if (f->loop.function)
 		f->loop.function(f->loop.arg);
