@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/22 22:48:33 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/22 23:05:04 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 
 Uint8	mousemoved(void *framework)
 {
+	t_point2	mousepos;
+
+	mousepos = get_mouse_pos(framework);
 	return (
-	((t_framework*)framework)->lastmousepos.x != get_mouse_pos(framework).x
-	|| ((t_framework*)framework)->lastmousepos.y != get_mouse_pos(framework).y);
+	((t_framework*)framework)->lastmousepos.x != mousepos.x
+	|| ((t_framework*)framework)->lastmousepos.y != mousepos.y);
 }
 
 void	check_mouse(t_framework *f, SDL_Event *e)
 {
 	Uint8		type;
+	t_point2	mousepos;
 
+	mousepos = get_mouse_pos(f);
 	if (mousemoved(f) && f->mousemove[e->button.windowID].function)
 		f->mousemove[e->button.windowID].
-			function(f->mousemove[e->button.windowID].arg, get_mouse_pos(f));
-	f->lastmousepos = get_mouse_pos(f);
+			function(f->mousemove[e->button.windowID].arg, mousepos);
+	f->lastmousepos = mousepos;
 	if (e->type == SDL_MOUSEBUTTONDOWN
 	|| e->type == SDL_MOUSEBUTTONUP)
 	{
@@ -70,18 +75,23 @@ void	framework_loop_once(void *framework)
 	t_framework	*f;
 	SDL_Event	e;
 
-	f = framework;
 	FRAMEWORK_DEBUG(!framework,
 		NULL_FRAMEWORK_POINTER, "framework_loop_once");
-	SDL_PollEvent(&e);
-	if ((f->done = e.type == SDL_QUIT))
+	f = framework;
+	if (f->done)
+		return ;
+	if (f->loop.function)
+		f->loop.function(f->loop.arg);
+	if (!SDL_PollEvent(&e)
+	|| (f->done = e.type == SDL_QUIT))
 		return ;
 	else if (e.type == SDL_APP_LOWMEMORY && f->low_mem.function)
 		f->low_mem.function(f->low_mem.arg);
-	if (f->loop.function)
-		f->loop.function(f->loop.arg);
-	check_mouse(framework, &e);
-	check_keyboard(framework, &e);
+	else
+	{
+		check_mouse(framework, &e);
+		check_keyboard(framework, &e);
+	}
 }
 
 void	framework_loop(void *framework)
@@ -93,22 +103,20 @@ void	framework_loop(void *framework)
 	f = framework;
 	while (!f->done)
 	{
-		if (e.type == SDL_APP_LOWMEMORY && f->low_mem.function)
-			f->low_mem.function(f->low_mem.arg);
 		if (f->loop.function)
 			f->loop.function(f->loop.arg);
-		while (SDL_PollEvent(&e) && !f->done)
+		if (SDL_PollEvent(&e))
 		{
-			f->done = e.type == SDL_QUIT;
-			if (f->done)
+			if ((f->done = e.type == SDL_QUIT))
 			{
 				if (f->onexit.function)
 					f->onexit.function(f->onexit.arg);
 				break ;
 			}
+			if (e.type == SDL_APP_LOWMEMORY && f->low_mem.function)
+				f->low_mem.function(f->low_mem.arg);
 			check_mouse(framework, &e);
 			check_keyboard(framework, &e);
 		}
 	}
-	destroy_framework(f);
 }
