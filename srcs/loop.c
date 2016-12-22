@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 15:44:17 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/22 22:41:34 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	check_keyboard(t_framework *f, SDL_Event *e)
 	}
 }
 
+BOOL	framework_is_done(void *framework)
+{
+	return (((t_framework*)framework)->done);
+}
+
 void	framework_loop_once(void *framework)
 {
 	t_framework	*f;
@@ -68,24 +73,16 @@ void	framework_loop_once(void *framework)
 	f = framework;
 	FRAMEWORK_DEBUG(!framework,
 		NULL_FRAMEWORK_POINTER, "framework_loop_once");
-	SDL_PollEvent(&e);
+	if (!SDL_PollEvent(&e) || (f->done))
+		return ;
+	else if ((f->done = e.type == SDL_QUIT))
+		return ;
 	if (e.type == SDL_APP_LOWMEMORY && f->low_mem.function)
 		f->low_mem.function(f->low_mem.arg);
 	if (f->loop.function)
 		f->loop.function(f->loop.arg);
-	while (SDL_PollEvent(&e) && !f->done)
-	{
-		f->done = e.type == SDL_QUIT;
-		if (f->done)
-		{
-			if (f->onexit.function)
-				f->onexit.function(f->onexit.arg);
-			destroy_framework(framework);
-			break ;
-		}
-		check_mouse(framework, &e);
-		check_keyboard(framework, &e);
-	}
+	check_mouse(framework, &e);
+	check_keyboard(framework, &e);
 }
 
 void	framework_loop(void *framework)
