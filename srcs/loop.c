@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/22 23:05:04 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/27 12:09:51 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	check_keyboard(t_framework *f, SDL_Event *e)
 	}
 }
 
-BOOL	framework_is_done(void *framework)
+char	framework_is_done(void *framework)
 {
 	return (((t_framework*)framework)->done);
 }
