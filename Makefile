@@ -85,6 +85,7 @@ endif
 
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
 test: test.o
 	@$(CC) $(CFLAGS) test.o -L ./ -lSDLframework $(LIBS) -o $(TEST)
