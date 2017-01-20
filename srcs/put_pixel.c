@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 17:48:07 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/10/22 23:35:49 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 12:58:07 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	*put_image_pixel(void *image, void *color, t_point2 position)
 	return (p);
 }
 
-
 void	*put_window_pixel(void *window, void *color, t_point2 position)
 {
 	void		*p;
@@ -42,9 +41,6 @@ void	*put_window_pixel(void *window, void *color, t_point2 position)
 	SDL_UnlockSurface(win->sdl_surface);
 	return (p);
 }
-
-#include <stdio.h>
-
 
 void	*put_window_image_pixel(void *window, void *color, t_point2 position)
 {

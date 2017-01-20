@@ -6,47 +6,90 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 18:59:58 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/15 12:05:26 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/01/20 20:44:10 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <internal_framework.h>
-#include <stdio.h>
 
-Uint8	mousemoved(void	*framework)
+Uint8	mousemoved(void *framework)
 {
-	t_framework	*f;
+	t_point2	mousepos;
+	t_point2	lastmousepos;
 
-	f = framework;
-	return (f->lastmousepos.x != get_mouse_pos(framework).x
-		|| f->lastmousepos.y != get_mouse_pos(framework).y);
+	mousepos = get_mouse_pos(framework);
+	lastmousepos = ((t_framework*)framework)->lastmousepos;
+	return (lastmousepos.x != mousepos.x || lastmousepos.y != mousepos.y);
 }
 
-void	check_mouse(void *framework, SDL_Event	e)
+void	check_mouse(t_framework *f, SDL_Event e)
+{
+	Uint8		type;
+	t_point2	mousepos;
+	t_callback	c;
+
+	mousepos = get_mouse_pos(f);
+	c = f->mousemove[e.button.windowID];
+	if (mousemoved(f) && c.function)
+		c.function(f->mousemove[e.button.windowID].arg, mousepos);
+	f->lastmousepos = mousepos;
+	if (e.type == SDL_MOUSEBUTTONDOWN
+	|| e.type == SDL_MOUSEBUTTONUP)
+	{
+		type = e.type == SDL_MOUSEBUTTONDOWN;
+		c = f->mouse[e.button.windowID][e.button.button][type];
+		f->buttons[e.button.button] = type;
+		if (c.function)
+			c.function(c.arg, e.button.button);
+	}
+}
+
+void	check_keyboard(t_framework *f, SDL_Event e)
+{
+	t_callback	c;
+
+	if (e.type == SDL_KEYDOWN)
+	{
+		c = f->keydown[e.key.windowID][e.key.keysym.scancode][e.key.repeat];
+		f->keys[e.key.keysym.scancode] = 1;
+		if (c.function)
+			c.function(c.arg, e.key.keysym.scancode);
+	}
+	else if (e.type == SDL_KEYUP)
+	{
+		c = f->keyup[e.key.windowID][e.key.keysym.scancode];
+		f->keys[e.key.keysym.scancode] = 0;
+		if (c.function)
+			c.function(c.arg, e.key.keysym.scancode);
+	}
+}
+
+char	framework_is_done(void *framework)
+{
+	return (((t_framework*)framework)->done);
+}
+
+void	framework_loop_once(void *framework)
 {
 	t_framework	*f;
+	SDL_Event	e;
 
+	FRAMEWORK_DEBUG(!framework,
+		NULL_FRAMEWORK_POINTER, "framework_loop_once");
 	f = framework;
-	if (e.type == SDL_MOUSEMOTION && mousemoved(framework))
+	if (f->done)
+		return ;
+	if (f->loop.function)
+		f->loop.function(f->loop.arg);
+	if (!SDL_PollEvent(&e)
+	|| (f->done = e.type == SDL_QUIT))
+		return ;
+	else if (e.type == SDL_APP_LOWMEMORY && f->low_mem.function)
+		f->low_mem.function(f->low_mem.arg);
+	else
 	{
-		if (f->mousemove[e.key.windowID].function)
-			f->mousemove[e.key.windowID].
-				function(f->mousemove[e.key.windowID].arg, get_mouse_pos(framework));
-		f->lastmousepos = get_mouse_pos(framework);
-	}
-	if (e.type == SDL_MOUSEBUTTONDOWN)
-	{
-		f->buttons[e.button.button] = 1;
-		if (f->mousedown[e.key.windowID][e.button.button].function)
-			f->mousedown[e.key.windowID][e.button.button].
-				function(f->mousedown[e.key.windowID][e.button.button].arg, e.button.button);
-	}
-	else if (e.type == SDL_MOUSEBUTTONUP)
-	{
-		f->buttons[e.button.button] = 0;
-		if (f->mouseup[e.key.windowID][e.button.button].function)
-			f->mouseup[e.key.windowID][e.button.button].
-				function(f->mouseup[e.key.windowID][e.button.button].arg, e.button.button);
+		check_mouse(framework, e);
+		check_keyboard(framework, e);
 	}
 }
 
@@ -54,37 +97,29 @@ void	framework_loop(void *framework)
 {
 	SDL_Event	e;
 	t_framework	*f;
-	Uint32		i[3];
+	t_callback	loop;
+	t_callback	onexit;
 
 	FRAMEWORK_DEBUG(!framework, NULL_FRAMEWORK_POINTER, "framework_loop");
 	f = framework;
 	while (!f->done)
 	{
-		if (f->loop.function)
-				f->loop.function(f->loop.arg);
-		while (SDL_PollEvent(&e) && !f->done)
+		loop = f->loop;
+		onexit = f->onexit;
+		if (loop.function)
+			loop.function(loop.arg);
+		if (SDL_PollEvent(&e))
 		{
-			i[0] = e.key.windowID;
-			i[1] = e.key.keysym.scancode;
-			i[2] = e.key.repeat;
-			if (e.type == SDL_QUIT)
-				f->done = SDL_TRUE;
+			if ((f->done = e.type == SDL_QUIT))
+			{
+				if (onexit.function)
+					onexit.function(onexit.arg);
+				break ;
+			}
+			if (e.type == SDL_APP_LOWMEMORY && f->low_mem.function)
+				f->low_mem.function(f->low_mem.arg);
 			check_mouse(framework, e);
-			if (e.type == SDL_KEYDOWN)
-			{
-				f->keys[i[1]] = 1;
-				if (f->keydown[i[0]][i[1]][i[2]].function)
-					f->keydown[i[0]][i[1]][i[2]].
-						function(f->keydown[i[0]][i[1]][i[2]].arg, i[1]);
-			}
-			else if (e.type == SDL_KEYUP)
-			{
-				f->keys[i[1]] = 0;
-				if (f->keyup[i[0]][i[1]].function)
-					f->keyup[i[0]][i[1]].
-						function(f->keyup[i[0]][i[1]].arg, i[1]);
-			}
+			check_keyboard(framework, e);
 		}
 	}
-	destroy_framework(f);
 }

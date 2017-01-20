@@ -6,7 +6,7 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/23 19:39:12 by gpinchon          #+#    #+#              #
-#    Updated: 2016/11/24 01:14:48 by gpinchon         ###   ########.fr        #
+#    Updated: 2016/12/20 15:45:27 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,10 @@ ifeq ($(OS), Windows_NT)
 				srcs\new_color.c			\
 				srcs\objects.c				\
 				srcs\loop.c					\
-				srcs\hook.c					\
+				srcs\hook_get.c				\
+				srcs\hook_set_keys.c		\
+				srcs\hook_set_mouse.c		\
+				srcs\hook_set_system.c		\
 				srcs\new_callback.c			\
 				srcs\internal_memory.c		\
 				srcs\internal_string.c		\
@@ -64,16 +67,25 @@ else
 				srcs/new_color.c			\
 				srcs/objects.c				\
 				srcs/loop.c					\
-				srcs/hook.c					\
+				srcs/hook_get.c				\
+				srcs/hook_set_keys.c		\
+				srcs/hook_set_mouse.c		\
+				srcs/hook_set_system.c		\
 				srcs/new_callback.c			\
 				srcs/internal_memory.c		\
 				srcs/internal_string.c		\
-				srcs/errors.c
+				srcs/errors.c				\
+				srcs/time.c
+endif
+
+ifeq ($(shell uname -s), Darwin)
+CFLAGS	= -Ofast -Wall -Wextra -Werror -I ~/.brew/include -I ./include
+LIBS	= -L ~/.brew/lib -lSDL2
 endif
 
 $(NAME): $(OBJ)
-	@echo $(OS)
 	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
 test: test.o
 	@$(CC) $(CFLAGS) test.o -L ./ -lSDLframework $(LIBS) -o $(TEST)

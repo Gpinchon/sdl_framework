@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 16:43:39 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/24 21:57:57 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/20 13:13:32 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,26 @@ void	*add_image(t_framework *framework, GSTRUCT *img)
 		return (append_object((void*)img, (void*)framework->images));
 }
 
-void	*new_image(void *framework, int width, int heigth)
+void	*new_image(void *framework, int w, int h)
 {
 	GSTRUCT	*gstruct;
 
 	gstruct = new_object(sizeof(t_img));
-	((t_img*)gstruct->data)->sdl_surface = SDL_CreateRGBSurface(0, width, heigth,
+	((t_img*)gstruct->data)->sdl_surface = SDL_CreateRGBSurface(0, w, h,
 		32, RMASK, GMASK, BMASK, AMASK);
 	return (add_image(framework, gstruct));
+}
+
+t_rgba	get_image_pixel_rgba(void *image, t_point2 coord)
+{
+	t_img	*img;
+	t_rgba	c;
+	Uint32	*pixel;
+
+	img = get_data_pointer(image, sizeof(t_img));
+	pixel = get_image_pixel(image, coord);
+	SDL_GetRGBA(*pixel, img->sdl_surface->format, &c.r, &c.g, &c.b, &c.a);
+	return (c);
 }
 
 IMGDATA	get_image_data(void *image)

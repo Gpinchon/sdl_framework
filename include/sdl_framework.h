@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:15:47 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/15 11:34:16 by gpinchon         ###   ########.fr       */
+/*   Updated: 2016/12/27 12:10:05 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,11 @@ void		*new_window(void *framework, int width, int height, char *name);
 void		*new_image(void *framework, int width, int heigth);
 void		*new_gl_context(void *window);
 t_callback	new_callback(void (*fun)(), void *arg);
+Uint32		get_ticks();
 /*
 ** Custom variables destruction
 */
+void		destroy_framework(void *framework);
 void		exit_framework(void *framework);
 void		destroy_window(void *framework, void *window);
 void		destroy_windows(void *framework);
@@ -156,6 +158,9 @@ IMGDATA		get_image_data(void *image);
 /*
 ** Pixel put functions, use to put a color (pointer to an rgb(a) struct) to image/window
 */
+t_rgba		get_image_pixel_rgba(void *image, t_point2 coord);
+void		*get_image_pixel(void *image, t_point2 position);
+void		*get_window_pixel(void *window, t_point2 position);
 void		*put_image_pixel(void *image, void *color, t_point2 position);
 void		*put_window_pixel(void *window, void *color, t_point2 position);
 void		*put_window_image_pixel(void *window, void *color, t_point2 position);
@@ -173,30 +178,33 @@ Uint8		mousemoved(void	*framework);
 t_point2	get_mouse_pos(void *framework);
 t_point2	get_last_mouse_pos(void *framework);
 void		framework_loop(void *framework);
+void		framework_loop_once(void *framework);
+char		framework_is_done(void *framework);
 /*
 ** loop_hook prototype == void callback(void *arg);
 */
-void		assign_loop_hook(void *framework, t_callback callback);
+void		set_loop_hook(void *framework, t_callback callback);
+void		set_onexit_hook(void *framework, t_callback callback);
 /*
 ** keyup/down/press_hook prototype == void callback(void *arg, Uint32 keycode);
 */
-void		assign_keyup_hook(void *framework, void *window,
-	Uint32 keycode, t_callback callback);
-void		assign_keyrepeat_hook(void *framework, void *window,
-	Uint32 keycode, t_callback callback);
-void		assign_keypress_hook(void *framework, void *window,
-	Uint32 keycode, t_callback callback);
+void		set_keyup_hook(void *framework, void *window,
+	char *keyname, t_callback callback);
+void		set_keypress_hook(void *framework, void *window,
+	char *keyname, t_callback callback);
+void		set_keyrepeat_hook(void *framework, void *window,
+	char *keyname, t_callback callback);
 /*
 ** mousemove_hook prototype == void callback(void *arg, t_point2 mouse_position);
 */
-void	assign_mousemove_hook(void *framework, void *window,
+void	set_mousemove_hook(void *framework, void *window,
 	t_callback callback);
 /*
 ** mousedown/up_hook prototype == void callback(void *arg, Uint8 button);
 */
-void	assign_mousedown_hook(void *framework, void *window,
+void	set_mousedown_hook(void *framework, void *window,
 	Uint8 button, t_callback callback);
-void	assign_mouseup_hook(void *framework, void *window,
+void	set_mouseup_hook(void *framework, void *window,
 	Uint8 button, t_callback callback);
 
 #endif
