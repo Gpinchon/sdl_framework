@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 16:45:27 by gpinchon          #+#    #+#             */
-/*   Updated: 2017/02/06 19:19:03 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/06 21:54:47 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	destroy_image(void *framework, void *image)
 {
 	GSTRUCT		*gstruct;
 	t_img		*img;
+	SDL_Surface	*surface;
 
 	gstruct = NULL;
 	FRAMEWORK_DEBUG(!image, NULL_WINDOW_POINTER, "destroy_image");
@@ -31,9 +32,10 @@ void	destroy_image(void *framework, void *image)
 	else if ((gstruct = ((GSTRUCT*)image)->next))
 		gstruct->prev = NULL;
 	img = get_data_pointer(image, sizeof(t_img));
-	SDL_FreeSurface(img->sdl_surface);
+	surface = img->sdl_surface;
 	free(img);
 	free(image);
+	SDL_FreeSurface(surface);
 }
 
 void	destroy_images(void *f)
