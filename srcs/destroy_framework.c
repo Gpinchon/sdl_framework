@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 15:36:09 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 12:36:46 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/06 19:18:14 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	destroy_framework(void *framework)
 {
 	FRAMEWORK_DEBUG(!framework, NULL_FRAMEWORK_POINTER, "destroy_framework");
-	if (((t_framework *)framework)->windows)
-		destroy_windows(((t_framework *)framework)->windows);
 	if (((t_framework *)framework)->images)
-		destroy_images(((t_framework *)framework)->images);
+		destroy_images(framework);
+	if (((t_framework *)framework)->windows)
+		destroy_windows(framework);
 	free(framework);
 	SDL_Quit();
 }

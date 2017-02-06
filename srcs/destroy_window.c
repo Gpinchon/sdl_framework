@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 15:45:50 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/11/15 11:35:46 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/06 19:18:39 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	destroy_window(void *framework, void *window)
 {
 	GSTRUCT		*win;
 	t_window	*winwin;
+	SDL_Window	*sdl_window;
 
 	win = NULL;
 	FRAMEWORK_DEBUG(!window, NULL_WINDOW_POINTER, "destroy_window");
@@ -31,9 +32,10 @@ void	destroy_window(void *framework, void *window)
 	else if ((win = (GSTRUCT *)((GSTRUCT*)window)->next))
 		win->prev = NULL;
 	winwin = get_data_pointer(window, sizeof(t_window));
-	SDL_DestroyWindow(winwin->sdl_window);
+	sdl_window = winwin->sdl_window;
 	free(window);
 	free(winwin);
+	SDL_DestroyWindow(sdl_window);
 }
 
 void	destroy_windows(void *f)

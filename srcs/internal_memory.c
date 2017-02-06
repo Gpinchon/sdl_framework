@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory_management.c                                :+:      :+:    :+:   */
+/*   internal_memory.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 13:15:45 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/07/02 13:17:10 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/06 18:55:06 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		*int_memalloc(size_t size)
 {
 	void	*memalloc;
 
-	if (!(memalloc = malloc(size)) || !size)
+	if (!size || !(memalloc = malloc(size)))
 		return (NULL);
 	int_memset(memalloc, '\0', size);
 	return (memalloc);
