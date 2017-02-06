@@ -6,13 +6,13 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/23 19:39:12 by gpinchon          #+#    #+#              #
-#    Updated: 2017/02/06 19:04:20 by gpinchon         ###   ########.fr        #
+#    Updated: 2017/02/06 19:25:27 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 OBJ		= $(SRC:.c=.o)
 CC		= gcc
-CFLAGS	= -g -Wall -Wextra -Werror -I ./include
+CFLAGS	= -Ofast -Wall -Wextra -Werror -I ./include
 NAME 	= libSDLframework.a
 
 ifeq ($(OS), Windows_NT)
