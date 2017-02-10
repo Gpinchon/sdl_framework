@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/02 14:17:20 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 13:17:00 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/10 12:47:16 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	*add_window(t_framework *framework, GSTRUCT *window)
 void		*new_window(void *framework,
 	int width, int height, char *name)
 {
-	GSTRUCT *gstruct;
+	t_generic	*gstruct;
 
 	FRAMEWORK_DEBUG(!framework, NULL_FRAMEWORK_POINTER, "new_window");
 	FRAMEWORK_DEBUG((width <= 0 || height <= 0),
@@ -51,7 +51,7 @@ void		*new_gl_context(void *w)
 	if (!((t_window*)((GSTRUCT*)w)->data)->gl_context)
 		return (((t_window*)((GSTRUCT*)w)->data)->gl_context =
 		SDL_GL_CreateContext(((t_window*)((GSTRUCT*)w)->data)->sdl_window));
-	return (NULL);
+		return (NULL);
 }
 
 void		set_window_clear_bits(void *window, GLbitfield clear_bits)
