@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 14:18:46 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 15:24:06 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/10 13:00:08 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 #  define CURENDIAN SDL_LIL_ENDIAN
 # endif
 
-# define __HALF_MAX_SIGNED(type) ((type)1 << (sizeof(type)*8-2))
-# define __MAX_SIGNED(type) (__HALF_MAX_SIGNED(type) - 1 + __HALF_MAX_SIGNED(type))
-# define __MIN_SIGNED(type) (-1 - __MAX_SIGNED(type))
-# define __MIN(type) ((type)-1 < 1?__MIN_SIGNED(type):(type)0)
-# define __MAX(type) ((type)~__MIN(type))
+# define __HALF_MAX_SIGNED(T) ((T)1 << (sizeof(T)*8-2))
+# define __MAX_SIGNED(T) (__HALF_MAX_SIGNED(T) - 1 + __HALF_MAX_SIGNED(T))
+# define __MIN_SIGNED(T) (-1 - __MAX_SIGNED(T))
+# define __MIN(T) ((T)-1 < 1?__MIN_SIGNED(T):(T)0)
+# define __MAX(T) ((T)~__MIN(T))
 
 # define GSTRUCT	struct s_generic
 # define MAX_REPEAT	2
@@ -57,13 +57,13 @@ typedef struct	s_img
 
 typedef struct	s_window
 {
-	t_rgb		clear_color;
-	Uint32		id;
-	SDL_Surface	*sdl_surface;
-	SDL_Window	*sdl_window;
+	t_rgb			clear_color;
+	Uint32			id;
+	SDL_Surface		*sdl_surface;
+	SDL_Window		*sdl_window;
 	SDL_GLContext	*gl_context;
-	GLbitfield  clear_bits;
-	GSTRUCT		*attached_image;
+	GLbitfield		clear_bits;
+	GSTRUCT			*attached_image;
 }				t_window;
 
 typedef struct	s_framework
@@ -84,18 +84,20 @@ typedef struct	s_framework
 	t_point2	lastmousepos;
 }				t_framework;
 
-void	*add_image(t_framework *framework, GSTRUCT *img);
-void	destroy_framework(void *framework);
-void	*int_memset(void *str, int c, size_t n);
-void	*int_memalloc(size_t size);
-void	*new_object(size_t size);
-void	*append_object(t_generic *new_object, t_generic *from_object);
-void	*get_data_pointer(t_generic *object, size_t size);
-void	destroy_objects(t_generic *from_object);
-void	init_errors(void);
-void	int_putstr_fd(char const *s, int fd);
-void	int_putendl_fd(char const *s, int fd);
-void	int_putnbr_fd(int n, int fd);
-Uint32	map_color(SDL_Surface *surface, void *color);
+void			*add_image(t_framework *framework, GSTRUCT *img);
+void			destroy_framework(void *framework);
+void			*int_memset(void *str, int c, size_t n);
+void			*int_memalloc(size_t size);
+void			*new_object(size_t size);
+void			*append_object(t_generic *new_object, t_generic *from_object);
+void			*get_data_pointer(t_generic *object, size_t size);
+void			destroy_objects(t_generic *from_object);
+void			init_errors(void);
+void			int_putstr_fd(char const *s, int fd);
+void			int_putendl_fd(char const *s, int fd);
+void			int_putnbr_fd(int n, int fd);
+Uint32			map_color(SDL_Surface *surface, void *color);
+void			check_mouse(t_framework *f, SDL_Event e);
+void			check_keyboard(t_framework *f, SDL_Event e);
 
 #endif

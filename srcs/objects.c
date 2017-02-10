@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/23 17:56:10 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 13:18:46 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/10 12:46:20 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*append_object(t_generic *new_object, t_generic *from_object)
 
 void	*new_object(size_t size)
 {
-	GSTRUCT	*gstruct;
+	t_generic	*gstruct;
 
 	gstruct = int_memalloc(sizeof(GSTRUCT));
 	FRAMEWORK_DEBUG(!gstruct, MALLOC_ERROR, "new_object");

@@ -6,13 +6,13 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 15:44:01 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 15:45:37 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/10 12:47:53 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <internal_framework.h>
 
-Uint32	get_ticks()
+Uint32	get_ticks(void)
 {
 	return (SDL_GetTicks());
 }

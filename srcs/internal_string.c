@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 10:52:53 by gpinchon          #+#    #+#             */
-/*   Updated: 2016/12/20 14:38:11 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/10 12:46:00 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void			int_putstr_fd(char const *str, int fd)
 void			int_putnbr_fd(int n, int fd)
 {
 	char	c;
+
 	if (n == __MAX(int))
 	{
 		int_putstr_fd("-2147483648", fd);
